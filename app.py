@@ -1,26 +1,13 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_bcrypt import Bcrypt
+from config import app
 
-from config import Config
+# Import models so Flask-Migrate can detect them
+from models import User, Note
 
-db = SQLAlchemy()
-migrate = Migrate()
-bcrypt = Bcrypt()
+from routes.auth import auth_bp
+from routes.notes import notes_bp
 
+app.register_blueprint(auth_bp)
+app.register_blueprint(notes_bp)
 
-def create_app():
-    app = Flask(__name__)
-
-    app.config.from_object(Config)
-
-    db.init_app(app)
-    migrate.init_app(app, db)
-    bcrypt.init_app(app)
-
-    # Load models so migrations can detect tables
-    with app.app_context():
-        import models
-
-    return app
+if __name__ == "__main__":
+    app.run(port=5555, debug=True)
