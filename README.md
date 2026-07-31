@@ -176,7 +176,7 @@ http://127.0.0.1:5555
 
 ## Author
 
-Lyndsey Nyanduko
+Lyndsey Isoe
 
 Moringa School Software Engineering Student
 
